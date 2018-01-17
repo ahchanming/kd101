@@ -36,4 +36,4 @@ def get_express_avg_days(express_company, start_code, end_code):
         return "None"
 
 
-get_express_detail("", "")
+#get_express_detail("", "")

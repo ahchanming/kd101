@@ -4,7 +4,9 @@
 import spider.kuaidi100
 import threading
 import json
+import net.server
 import time
+from proto import request_pb2
 
 fileInput = open("data/area.txt")
 area_codes = []
@@ -33,9 +35,9 @@ def read_avg_from_kd100(area_codes, start_code, express_company, resultmap):
 
 def dump2file(resultmap):
     while True:
-        #time.sleep(3600)
+        # time.sleep(3600)
         file_output = open("output.txt", "w")
-        #data = {'data': resultmap, 'version': time.time()}
+        # data = {'data': resultmap, 'version': time.time()}
         file_output.write(json.dumps(resultmap))
         file_output.close()
 
@@ -54,4 +56,11 @@ def dump_data_from_kd100():
     dump2file(result_map)
 
 
-dump_data_from_kd100()
+if __name__ == '__main__':
+    net.server.start_host(9999)
+    while True:
+        client_socket, addr = net.server.accept()
+        tmp_request = net.server.get_request(client_socket)
+        print(tmp_request.type, tmp_request.expressCom, tmp_request.expressCode)
+        client_socket.send("HelloWorld".encode("utf-8"))
+        client_socket.close()
