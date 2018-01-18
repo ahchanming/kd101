@@ -11,8 +11,8 @@ port = 9999
 s.connect((host, port))
 request = request_pb2.request()
 request.type = 4
-request.expressCom = "YTO"
-request.expressCode = "13214124315"
+request.expressCom = "yuantong"
+request.expressCode = "812505567814"
 data = request.SerializeToString()
 s.send(data)
 msg = s.recv(1024)

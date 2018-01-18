@@ -62,5 +62,6 @@ if __name__ == '__main__':
         client_socket, addr = net.server.accept()
         tmp_request = net.server.get_request(client_socket)
         print(tmp_request.type, tmp_request.expressCom, tmp_request.expressCode)
-        client_socket.send("HelloWorld".encode("utf-8"))
+        tmp_response = spider.kuaidi100.get_express_detail(tmp_request.expressCode, tmp_request.expressCom)
+        client_socket.send(tmp_response.encode("utf-8"))
         client_socket.close()
