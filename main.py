@@ -32,7 +32,7 @@ def read_avg_from_kd100(area_codes, start_code, express_company, resultmap):
 
 def dump2file(resultmap):
     while True:
-        time.sleep(3600)
+        #time.sleep(3600)
         file_output = open("output.txt", "w")
         data = {'data': resultmap, 'version': time.time()}
         file_output.write(json.dumps(data))
