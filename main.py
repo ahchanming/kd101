@@ -25,6 +25,7 @@ def read_avg_from_kd100(area_codes, start_code, express_company, resultmap):
     result = []
     for end_code in area_codes:
         days = spider.kuaidi100.get_express_avg_days(express_company, start_code, end_code)
+        print(days)
         if days != "None":
             result.append({'start': start_code, 'end': end_code, 'days': days})
     resultmap[(start_code, express_company)] = result
@@ -34,8 +35,8 @@ def dump2file(resultmap):
     while True:
         #time.sleep(3600)
         file_output = open("output.txt", "w")
-        data = {'data': resultmap, 'version': time.time()}
-        file_output.write(json.dumps(data))
+        #data = {'data': resultmap, 'version': time.time()}
+        file_output.write(json.dumps(resultmap))
         file_output.close()
 
 

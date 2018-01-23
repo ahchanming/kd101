@@ -4,10 +4,15 @@ import re
 
 
 def get_express_detail(express_code, express_company):
-    url = "https://www.kuaidi100.com/time/comtimecostinfo_5_CN350213_CN440515.htm?"
+    url = "http://www.kuaidi100.com/query?type=yuantong&postid=812553308147&temp=0.337383568273006"
     dict = {}
     dict['type'] = express_company
     dict['postid'] = express_code
+    proxy = {"http": "116.52.78.192:9999"}
+    proxy_support = urllib.request.ProxyHandler(proxy)
+    opener = urllib.request.build_opener(proxy_support)
+    opener.addheaders = [('User-Agent','Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36')]
+    urllib.request.install_opener(opener)
     response = urllib.request.urlopen(url)
     # response = json.load(r.read())
     # print(response)
@@ -29,3 +34,6 @@ def get_express_avg_days(express_company, start_code, end_code):
         return result.group(0)
     except:
         return "None"
+
+
+get_express_detail("", "")
